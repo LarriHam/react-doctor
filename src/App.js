@@ -31,6 +31,11 @@ import DiagnosesHome from "./pages/diagnoses/DiagnosesHome";
 import CreateDiagnoses from "./pages/diagnoses/CreateDiagnoses";
 import EditDiagnoses from "./pages/diagnoses/EditDiagnoses";
 
+//prescriptions
+import PrescriptionsHome from "./pages/prescriptions/PrescriptionsHome";
+import CreatePrescription from "./pages/prescriptions/CreatePrescriptions";
+import EditPrescription from "./pages/prescriptions/EditPrescriptions";
+
 export const UserContext = createContext();
 
 const App = () => {
@@ -80,6 +85,12 @@ const App = () => {
                                     <Route path='/diagnoses' element={<DiagnosesHome />}/>
                                     <Route path='/diagnoses/create' element={<CreateDiagnoses />} />
                                     <Route path='/diagnoses/:id/edit' element={<EditDiagnoses />} />
+                                </Route>
+
+                                <Route path='/prescriptions' element={<ProtectedRoute />}>
+                                    <Route path='/prescriptions' element={<PrescriptionsHome />}/>
+                                    <Route path='/prescriptions/create' element={<CreatePrescription />} />
+                                    <Route path='/prescriptions/:id/edit' element={<EditPrescription />} />
                                 </Route>
 
                                 <Route path='/login' element={<LoginForm />} />

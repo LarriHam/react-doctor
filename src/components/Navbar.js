@@ -34,6 +34,10 @@ const Navbar = () => {
                     Diagnoses
                 </Button>
 
+                <Button component={Link} to='/prescriptions'>
+                    Prescriptions
+                </Button>
+
                 <Button component={Link} to='/register'>
                     Register
                 </Button>
