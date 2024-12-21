@@ -21,6 +21,11 @@ import SinglePatient from "./pages/patients/SinglePatient";
 import CreatePatient from './pages/patients/CreatePatient';
 import EditPatient from './pages/patients/EditPatient';
 
+//appointments
+import AppointmentHome from './pages/appointments/AppointmentHome';
+import CreateAppointment from './pages/appointments/CreateAppointment';
+import EditAppointment from './pages/appointments/EditAppointment';
+
 export const UserContext = createContext();
 
 const App = () => {
@@ -57,6 +62,14 @@ const App = () => {
                                     <Route path='/patients/:id/edit' element={<EditPatient />} />
                                     <Route path='/patients/:id' element={<SinglePatient />} />
                                 </Route>
+
+                                {/* Appointment routes */} 
+                                <Route path='/appointments' element={<ProtectedRoute />}>
+                                    <Route path='/appointments' element={<AppointmentHome />}/>
+                                    <Route path='/appointments/create' element={<CreateAppointment />} />
+                                    <Route path='/appointments/:id/edit' element={<EditAppointment />} />
+                                </Route>
+
                                 <Route path='/login' element={<LoginForm />} />
                                 <Route path='/register' element={<RegisterForm />} />
                             </Routes>
