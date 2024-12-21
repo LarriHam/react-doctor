@@ -53,6 +53,14 @@ const SinglePatient = () => {
                 <p >Phone:</p> <Space w="md"/>
                 <p>{patient.phone}</p>
             </Flex>
+            <Flex>
+                <p >Date of Birth:</p> <Space w="md"/>
+                <p>{patient.date_of_birth}</p>
+            </Flex>
+            <Flex>
+                <p >Address:</p> <Space w="md"/>
+                <p>{patient.address}</p>
+            </Flex>
     
         </div>
     )

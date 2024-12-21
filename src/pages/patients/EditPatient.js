@@ -18,15 +18,17 @@ const EditPatient = () => {
             first_name: '',
             last_name: '',
             email: '',
-            phone: ''
-
+            phone: '',
+            date_of_birth: '',
+            address: '',
         },
         validate: {
             first_name: (value) => value.length > 2 && value.length < 255 ? null : 'First name must be between 2 and 255 characters',
             last_name: (value) => value.length > 2 && value.length < 255 ? null : 'Last name must be between 2 and 255 characters',
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'), // regex for validating an email address
             phone: (value) => value.length === 10 ? null : 'Phone number must be 10 digits',
-            
+            date_of_birth: (value) => value ? null : 'Date of birth is required',
+            address: (value) => value.length > 0 ? null : 'Address is required'
         },
     });
 
@@ -90,13 +92,10 @@ const EditPatient = () => {
                 onSubmit={form.onSubmit(handleSubmit)}>
                 <TextInput withAsterisk label={'First name'} name='first_name' {...form.getInputProps('first_name')} />
                 <TextInput withAsterisk label='Last name' name='last_name' {...form.getInputProps('last_name')} />
-
-
-                {/* form.getInputProps('email') returns an object with props about the input */}
-                {/* We can spread (...) this object to pass all the props to the input all at once */}
                 <TextInput label={'Email'} withAsterisk name='email' {...form.getInputProps('email')} />
-
                 <TextInput label={'Phone'} name='phone' withAsterisk {...form.getInputProps('phone')} />
+                <TextInput withAsterisk label="Date of Birth" type="date" {...form.getInputProps('date_of_birth')} />
+                <TextInput withAsterisk label="Address" {...form.getInputProps('address')} />
 
                 <Button mt={10} type={'submit'}>Submit</Button>
             </form>

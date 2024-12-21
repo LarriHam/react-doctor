@@ -18,7 +18,9 @@ const CreatePatient = () => {
             first_name: '',
             last_name: '',
             email: '',
-            phone: ''
+            phone: '',
+            date_of_birth: '', 
+            address: ''
 
         },
         // before mantine allows us to submit the form, we can run our own validation
@@ -26,8 +28,10 @@ const CreatePatient = () => {
             first_name: (value) => value.length > 2 && value.length < 255 ? null : 'First name must be between 2 and 255 characters',
             last_name: (value) => value.length > 2 && value.length < 255 ? null : 'Last name must be between 2 and 255 characters',
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'), // regex for validating an email address
-            phone: (value) => value.length === 10 ? null : 'Phone number must be 10 digits'
-            
+            phone: (value) => value.length === 10 ? null : 'Phone number must be 10 digits',
+            date_of_birth: (value) => value && value.length > 0 ? null : 'Date of birth is required',
+            address: (value) => value && value.length > 0 ? null : 'Address is required'
+                    
         },
     })
 
@@ -72,7 +76,8 @@ const CreatePatient = () => {
                 <TextInput withAsterisk label='Last name' name='last_name' {...form.getInputProps('last_name')} />
                 <TextInput label={'Email'} withAsterisk name='email' {...form.getInputProps('email')} />
                 <TextInput label={'Phone'} name='phone' withAsterisk {...form.getInputProps('phone')} />
-               
+                <TextInput withAsterisk label={'Date of Birth'} name='date_of_birth' {...form.getInputProps('date_of_birth')} />
+                <TextInput withAsterisk label={'Address'} name='address' {...form.getInputProps('address')} />
                 <Button mt={10} type={'submit'}>Submit</Button>
             </form>
         </div>
