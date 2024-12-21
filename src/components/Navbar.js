@@ -30,6 +30,10 @@ const Navbar = () => {
                     Appointments
                 </Button>
 
+                <Button component={Link} to='/diagnoses'>
+                    Diagnoses
+                </Button>
+
                 <Button component={Link} to='/register'>
                     Register
                 </Button>
