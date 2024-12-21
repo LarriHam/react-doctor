@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useLocation, useNavigate } from "react-router-dom";
-import { Card, SimpleGrid, Button, Text, Flex, Space, Link } from "@mantine/core";
+import { Card, SimpleGrid, Button, Text, Flex, Space } from "@mantine/core";
 import { useAuth } from "../../utils/useAuth";
 
 const AppointmentHome = () => {
@@ -48,12 +48,12 @@ const AppointmentHome = () => {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getPatients();
-            await getAppointments();
-            await getDoctors();
-        }
-        fetchData();
+      const fetchData = async () => {
+        await getPatients();
+        await getAppointments();
+        await getDoctors();
+      }
+      fetchData();
     }, [token]);
 
     const getDoctorName = (doctorId) => {
@@ -83,7 +83,6 @@ const AppointmentHome = () => {
           alert("Can't delete appointment!");
         }
     };
-    
 
     return (
         
@@ -107,7 +106,7 @@ const AppointmentHome = () => {
                                 </Flex>
                                 <Flex w={'100%'} justify={'space-between'}>
                                     <button onClick={(e) => {e.stopPropagation();handleDelete(appointment.id);}}>🗑️</button>
-                                    <button onClick={(appointmentId) => navigate(`/appointments/${appointmentId}/edit`)}>Edit</button>
+                                    <button onClick={() => navigate(`/appointments/{$id}/edit`)}>Edit</button>
     
                                 </Flex>
                                 

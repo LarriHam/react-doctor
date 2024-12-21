@@ -12,7 +12,6 @@ const Edit = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Starting off with an empty object for our form
     const form = useForm({
         initialValues: {
             first_name: '',

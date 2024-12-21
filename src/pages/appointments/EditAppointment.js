@@ -1,6 +1,6 @@
-import { useEffect, useState, useParams } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import { useAuth } from "../../utils/useAuth";
 import { useForm } from '@mantine/form';
 import { Select, TextInput, Text, Button } from "@mantine/core";
@@ -31,17 +31,6 @@ const EditAppointment = () => {
     })
 
     useEffect(() => {
-        const fetchPatients = async () => {
-            try {
-                const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/patients`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setPatients(res.data);
-            } catch (e) {
-                console.error(e);
-            }
-        };
-
         const fetchDoctors = async () => {
             try {
                 const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/doctors`, {
@@ -53,7 +42,18 @@ const EditAppointment = () => {
             }
         };
 
-        const fetchAppointment = async () => {
+        const fetchPatients = async () => {
+            try {
+                const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/patients`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setPatients(res.data);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+       const fetchAppointment = async () => {
             try {
                 const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/appointments/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
@@ -75,10 +75,9 @@ const EditAppointment = () => {
                 }       
             }              
         };
-
-        fetchAppointment();
-        fetchPatients();
-        fetchDoctors();       
+        fetchDoctors(); 
+        fetchPatients();           
+        fetchAppointment();   
     }, [id, token, navigate]);
 
     const handleSubmit = () => {
@@ -109,23 +108,22 @@ const EditAppointment = () => {
     return (
         <div>
             <Text size={24} mb={5}>Update Appointment</Text>
-            <form
-                onSubmit={form.onSubmit(handleSubmit)}>
-                    <Select
-                        withAsterisk
-                        label="Pick a doctor"
-                        placeholder="Pick a doctor"
-                        data={doctors.map(doctor => ({value: doctor.id, label: `${doctor.first_name} ${doctor.last_name}`}))}
-                        {...form.getInputProps('doctor_id')}
-                    />
-                    <Select
-                        withAsterisk
-                        label="Pick a patient"
-                        placeholder="Pick a patient"
-                        data={patients.map(patient => ({value: patient.id, label: `${patient.first_name} ${patient.last_name}`}))}
-                        {...form.getInputProps('patient_id')}
-                    /> 
-                    <TextInput withAsterisk label="Date" type="date" {...form.getInputProps('appointment_date')}/>
+            <form onSubmit={form.onSubmit(handleSubmit)}>
+                <Select
+                    withAsterisk
+                    label="Pick a doctor"
+                    placeholder="Pick a doctor"
+                    data={doctors.map(doctor => ({value: doctor.id, label: `${doctor.first_name} ${doctor.last_name}`}))}
+                    {...form.getInputProps('doctor_id')}
+                />
+                <Select
+                    withAsterisk
+                    label="Pick a patient"
+                    placeholder="Pick a patient"
+                    data={patients.map(patient => ({value: patient.id, label: `${patient.first_name} ${patient.last_name}`}))}
+                    {...form.getInputProps('patient_id')}
+                /> 
+                <TextInput withAsterisk label="Date" type="date" {...form.getInputProps('appointment_date')}/>
                
                 <Button mt={10} type={'submit'}>Submit</Button>
             </form>
