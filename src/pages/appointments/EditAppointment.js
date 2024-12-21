@@ -6,9 +6,10 @@ import { useForm } from '@mantine/form';
 import { Select, TextInput, Text, Button } from "@mantine/core";
 
 const EditAppointment = () => {
+    const { id } = useParams();
     const { token } = useAuth();
     const navigate = useNavigate();
-    const { id } = useParams();
+    
 
     const [patients, setPatients] = useState([]);
     const [doctors, setDoctors] = useState([]);
@@ -83,9 +84,10 @@ const EditAppointment = () => {
     const handleSubmit = () => {
         const formattedDate = new Date(form.values.appointment_date).toISOString().split('T')[0];
         const appointmentData = {
+            id: id,
             doctor_id: parseInt(form.values.doctor_id, 10),
-            patient_id: parseInt(form.values.patient_id, 10),
-            appointment_date: formattedDate, 
+            patient_id: parseInt(form.values.patient_id, 10),            
+            appointment_date: formattedDate
         }; 
         axios.patch(`https://fed-medical-clinic-api.vercel.app/appointment/${id}`, appointmentData, {
             headers: { Authorization: `Bearer ${token}` },
@@ -102,7 +104,7 @@ const EditAppointment = () => {
                 navigate('/appointments', { state: { msg: 'no Appointment' } });
             }
         });
-    }
+    };
 
 
     return (

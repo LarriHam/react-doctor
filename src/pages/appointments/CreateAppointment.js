@@ -30,17 +30,6 @@ const CreateAppointment = () => {
     })
 
     useEffect(() => {
-        const fetchPatients = async () => {
-            try {
-                const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/patients`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setPatients(res.data);
-            } catch (e) {
-                console.error(e);
-            }
-        };
-
         const fetchDoctors = async () => {
             try {
                 const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/doctors`, {
@@ -51,9 +40,20 @@ const CreateAppointment = () => {
                 console.error(e);
             }
         };
+
+        const fetchPatients = async () => {
+            try {
+                const res = await axios.get(`https://fed-medical-clinic-api.vercel.app/patients`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setPatients(res.data);
+            } catch (e) {
+                console.error(e);
+            }
+        };
         
-        fetchPatients();
-        fetchDoctors();       
+        fetchDoctors();
+        fetchPatients();               
     }, [token]);
 
     const handleSubmit = () => {

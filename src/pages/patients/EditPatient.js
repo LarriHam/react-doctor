@@ -39,7 +39,6 @@ const EditPatient = () => {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
-                // Only update form values if the data is not already set
                 if (form.values.first_name === '') {
                     form.setValues(response.data);
                 }
